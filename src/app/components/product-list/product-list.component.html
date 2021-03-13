@@ -2,19 +2,30 @@
     <div class="row">
         <div class="col col-12 ">
             <h1>
-                Product list
+                Products!
             </h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row list--products">
         <div class="row col-12 mb-4 mt-4 item--title">
         </div>
         <div *ngFor="let item of listProducts" class="col-12 product-card">
             <div class="row">
-                <p class="col-4"><label class="product--title col-12">{{item.name}}</label><label
-                        class="product--description col-12">{{item.description}}</label></p>
-                <p class="col-4"><strong>Disponible: </strong>{{item.value}}</p>
-                <div class="col-4"><button class="btn btn-primary">Buy</button></div>
+                <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <label class="product--title col-12">{{item.name}}</label>
+                    <label class="product--description col-12">{{item.description}}</label></p>
+                <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12"><strong class="col-12">Disponible:
+                    </strong>{{item.value}}</p>
+                <form class="col-lg-3 col-md-3 col-xs-12 col-sm-12 form-quantity">
+                    <button class="btn btn-outline-black col-lg-2 col-md-2 col-sm-6 col-xs-6">+</button>
+                    <button class="btn btn-outline-black col-lg-2 col-md-2 col-sm-6 col-xs-6">-</button>
+                    <input class="form-control col-lg-6 col-md-6 col-sm-6 col-xs-6 float-right" 
+                        [(ngModel)]="item.ammount" type="number" name="ammount">
+                </form>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <button class="btn btn-primary float-right" (click)="buyProduct(item)"><i
+                            class="fas fa-cart-arrow-down"></i>Buy</button>
+                </div>
             </div>
         </div>
     </div>

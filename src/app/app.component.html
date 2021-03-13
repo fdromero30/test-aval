@@ -1,11 +1,23 @@
 <nav class="navbar">
   <div class="container-fluid">
-    <a class="navbar-brand">AVAL TEST APP</a>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-dark" type="submit">Search</button>
-    </form>
+    <img src="assets/shop.png" (click)="goToHome()">
+
+    <div *ngIf="!autenticated">
+      <button class="btn btn-outline-dark" type="submit" (click)="logIn()">Log In</button>
+      <button class="btn btn-danger ml-1" type="submit" (click)="register()">Sign In</button>
+    </div>
+
+
   </div>
 </nav>
-<router-outlet></router-outlet>
+<div [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet" ></router-outlet>
+</div>
 
+<div class="background-fractal">
+
+</div>
+
+<div class="background-fractal-top">
+
+</div>
