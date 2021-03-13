@@ -14,12 +14,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
+import { SigninComponent } from './components/signin/signin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
-    LoginComponent
+    LoginComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,

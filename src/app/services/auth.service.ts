@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as firebase from "firebase";
+import { BehaviorSubject } from 'rxjs';
+import { User } from '../models/user.model';
 
 
 export class FirebaseErrorconstants {
@@ -17,7 +19,7 @@ export class FirebaseErrorconstants {
 @Injectable()
 export class AuthService {
 
-    authenticated = false;
+    authenticated: BehaviorSubject<boolean>;
     email: any;
     user: any;
     supportedPopupSignInMethods = [
@@ -26,13 +28,20 @@ export class AuthService {
     ];
 
     constructor(private afsAuth: AngularFireAuth, private router: Router) {
+        this.user = new User();
+        this.authenticated = new BehaviorSubject<boolean>(false);
+        this.isAuthenticated();
     }
 
     // ...
     isAuthenticated() {
         // Check whether the token is expired and return
         // true or false
-        return this.authenticated;
+        const aut = JSON.parse(localStorage.getItem('autenticated'));
+        this.authenticated.next(aut);
+        if (aut) {
+            this.user = JSON.parse(localStorage.getItem('user'));
+        }
     }
 
     /**
@@ -143,6 +152,7 @@ export class AuthService {
      */
     handlerErrorAuth(err) {
         console.log(err);
+        alert(err.message);
     }
 
     /**
@@ -150,8 +160,9 @@ export class AuthService {
      */
 
     logOutUser() {
-        this.authenticated = false;
-        this.router.navigate(['authentication/login']);
+        this.authenticated.next(false);
+        localStorage.clear();
+        this.router.navigate(['login']);
         this.afsAuth.signOut();
         this.user = null;
 
@@ -168,7 +179,9 @@ export class AuthService {
      *
      */
     saveUserStorage() {
-        this.authenticated = true;
+        this.authenticated.next(true);
+        localStorage.setItem('user', JSON.stringify(this.user));
+        localStorage.setItem('autenticated', 'true');
     }
 
     /**

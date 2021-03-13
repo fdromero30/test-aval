@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
     this.auth
       .loginUserEmail(this.form.get('email').value, this.form.get('password').value)
       .then((res) => {
-        this.auth.authenticated = true;
         console.log(res, "succesfylly login!");
         this.router.navigate(['']);
       });

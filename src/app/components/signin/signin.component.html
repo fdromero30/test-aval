@@ -35,6 +35,38 @@
 							</small>
 						</p>
 					</div>
+					<div class="input-group">
+						<p class="col-12">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input id="documentUser" type="text" class="form-control" name="documentUser"
+								formControlName="documentUser" placeholder="Identity Document">
+						</p>
+						<p *ngIf="form.get('documentUser').errors  && form.get('documentUser').dirty" class="col-12">
+
+							<small *ngIf="form.get('documentUser').hasError('required')">
+								<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+							</small>
+							<small *ngIf="form.get('documentUser').hasError('maxlength')">
+								<ion-icon name="alert-circle-outline"></ion-icon> Longitud maxima 50!
+							</small>
+							<small *ngIf="form.get('documentUser').hasError('minlength')">
+								<ion-icon name="alert-circle-outline"></ion-icon> Longitud minima 10!
+							</small>
+						</p>
+					</div>
+					<div class="input-group">
+						<p class="col-12">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input id="phone" type="text" class="form-control" name="phone" formControlName="phone"
+								placeholder="Phone">
+						</p>
+						<p *ngIf="form.get('phone').errors  && form.get('phone').dirty" class="col-12">
+
+							<small *ngIf="form.get('phone').hasError('required')">
+								<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+							</small>
+						</p>
+					</div>
 
 					<div class="input-group">
 						<p class="col-12">
@@ -51,16 +83,37 @@
 								<ion-icon name="alert-circle-outline"></ion-icon> Longitud maxima 50!
 							</small>
 							<small *ngIf="form.get('password').hasError('minlength')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Longitud minima 10!
+								<ion-icon name="alert-circle-outline"></ion-icon> Debe contener al menos 6 caracteres!
 							</small>
 						</p>
 					</div>
 
+					<div class="input-group">
+						<p class="col-12">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input id="copyPassword" type="password" class="form-control" name="copyPassword"
+								formControlName="copyPassword" placeholder="Confirm Password">
+						</p>
+						<p *ngIf="form.get('copyPassword').errors  && form.get('copyPassword').dirty" class="col-12">
+
+							<small *ngIf="form.get('copyPassword').hasError('required')">
+								<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+							</small>
+							<small *ngIf="form.get('copyPassword').hasError('maxlength')">
+								<ion-icon name="alert-circle-outline"></ion-icon> Longitud maxima 50!
+							</small>
+							<small *ngIf="form.get('copyPassword').hasError('minlength')">
+								<ion-icon name="alert-circle-outline"></ion-icon> Debe contener al menos 6 caracteres!
+							</small>
+						</p>
+					</div>
+
+
 					<div class="form-group">
 						<!-- Button -->
 						<div class="col-sm-12 controls">
-							<button type="submit" href="#" class="btn btn-primary pull-right" (click)="onLogin()"
-								[disabled]="form.invalid"><i class="glyphicon glyphicon-log-in"></i> Log in</button>
+							<button type="submit" href="#" class="btn btn-primary pull-right" (click)="onSignIn()"
+								[disabled]="form.invalid"><i class="glyphicon glyphicon-log-in"></i> Sign in</button>
 							<button class="btn btn-outline-danger ml-2" (click)="onLoginGoogle()">
 								Google +
 							</button>
