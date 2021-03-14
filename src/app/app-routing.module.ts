@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { AuthGuardService } from './guards/auth.guard';
+import { CreateProductComponent } from './components/create-product/create-product.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,9 @@ const routes: Routes = [
   },
   {
     path: RouteConstants.PROFILE_PATH, component: EditUserComponent, data: { animation: 'AboutPage' }, canActivate: [AuthGuardService]
+  },
+  {
+    path: RouteConstants.CREATE_PRODUCT_PATH, component: CreateProductComponent, data: { animation: 'AboutPage' }, canActivate: [AuthGuardService]
   }
 
 ];

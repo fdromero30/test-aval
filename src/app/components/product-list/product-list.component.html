@@ -4,7 +4,7 @@
             <h1 class="float-left">
                 Products!
             </h1>
-            <button class="btn btn-primary float-right" *ngIf="typeUser == 'Administrador'">
+            <button class="btn btn-primary float-right" *ngIf="typeUser == 'Administrador'" (click)="navigateToCreateProduct()">
                 <i class="fas fa-plus"></i> Crear Nuevo Producto
             </button>
         </div>
@@ -17,8 +17,8 @@
                 <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <label class="product--title col-12">{{item.name}}</label>
                     <label class="product--description col-12">{{item.description}}</label></p>
-                <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12"><strong class="col-12">Disponible:
-                    </strong>{{item.value}}</p>
+                <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12"><strong class="col-12">Valor:
+                    </strong>{{item.value}} $</p>
                 <form class="col-lg-3 col-md-3 col-xs-12 col-sm-12 form-quantity" *ngIf="typeUser != 'Administrador'">
                     <button class="btn btn-outline-black col-lg-2 col-md-2 col-sm-6 col-xs-6">+</button>
                     <button class="btn btn-outline-black col-lg-2 col-md-2 col-sm-6 col-xs-6">-</button>
@@ -27,10 +27,11 @@
                 </form>
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 float-right" style="position: absolute; right: 0;">
                     <button class="btn btn-primary float-right" (click)="buyProduct(item)"
-                        *ngIf="typeUser != 'Administrador' && typeUser"><i class="fas fa-cart-arrow-down"></i>Buy</button>
-                    <button class="btn btn-primary float-right" (click)="buyProduct(item)"
+                        *ngIf="typeUser != 'Administrador' && typeUser"><i
+                            class="fas fa-cart-arrow-down"></i>Buy</button>
+                    <button class="btn btn-primary float-right" (click)="editProduct(item)"
                         *ngIf="typeUser == 'Administrador'"><i class="fas fa-cart-arrow-down"></i>Editar</button>
-                    <button class="btn btn-danger float-right" (click)="buyProduct(item)"
+                    <button class="btn btn-danger float-right" (click)="deleteProduct(item)"
                         *ngIf="typeUser == 'Administrador'"><i class="fas fa-cart-arrow-down"></i>Eliminar</button>
                 </div>
             </div>

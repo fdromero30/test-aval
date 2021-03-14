@@ -1,0 +1,56 @@
+<div class="container">
+
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+
+            <form [formGroup]="form" name="form" id="form" enctype="multipart/form-data">
+
+                <div class="col-12 float-left">
+                    <div class="input-group">
+
+                        <p class="col-12">
+                            <label>Nombre:</label>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="nombreProducto" type="text" class="form-control" formControlName="nombreProducto"
+                                name="nombreProducto" value="" placeholder="Nombre Producto" [(ngModel)]="product.name">
+                        </p>
+                        <p *ngIf="form.get('nombreProducto').errors  && form.get('nombreProducto').dirty"
+                            class="col-12">
+                            <small *ngIf="form.get('nombreProducto').hasError('required')">
+                                <ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+                            </small>
+                        </p>
+                    </div>
+                    <div class="input-group">
+                        <p class="col-12">
+                            <label>Valor Unitario:</label>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="productValue" type="number" class="form-control" name="productValue"
+                                formControlName="productValue" placeholder="Documento de Identidad"
+                                [(ngModel)]="product.value">
+                        </p>
+                        <p *ngIf="form.get('productValue').errors  && form.get('productValue').dirty" class="col-12">
+
+                            <small *ngIf="form.get('productValue').hasError('required')">
+                                <ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+                            </small>
+                            <small *ngIf="form.get('productValue').hasError('min')">
+                                <ion-icon name="alert-circle-outline"></ion-icon> El valor debe ser superior a 0!
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                <div class=" col-12 input-group mt-4">
+                    <p class="col-12">
+                        <button class="btn btn-primary float-right" (click)="saveForm()"
+                        [disabled]="form.invalid">Guardar</button>
+                        <button class="btn btn-danger float-right mr-2" (click)="cancel()">Cancelar</button>
+                    </p>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
