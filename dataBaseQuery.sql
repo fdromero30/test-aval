@@ -1,0 +1,95 @@
+
+
+CREATE DATABASE testAval;
+
+USE testAval;
+
+
+IF EXISTS(SELECT *
+FROM dbo.Clients)
+  DROP TABLE dbo.Clients
+IF EXISTS(SELECT *
+FROM dbo.Products)
+  DROP TABLE dbo.Products
+IF EXISTS(SELECT *
+FROM dbo.ProductsClient)
+  DROP TABLE dbo.ProductsClient
+
+-- CREACION TABLA CLIENTS
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Clients]
+(
+    [id] [nvarchar](70) NOT NULL,
+    [cedula] [nvarchar](70) NOT NULL,
+    [primerNombre] [nvarchar](70) NOT NULL,
+    [segundoNombre] [nvarchar](70) NULL,
+    [primerApellido] [nvarchar](70) NOT NULL,
+    [segundoApellido] [nvarchar](70) NULL,
+    [telefono] [nvarchar](70) NULL,
+    [tipoUsuario] [nvarchar](1) NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+ALTER TABLE [dbo].[Clients] ADD PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+-- CREACION TABLA PRODUCTS
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Products]
+(
+    [id] [int] IDENTITY(1,1) NOT NULL,
+    [name] [nvarchar](max) NULL,
+    [description] [nvarchar](max) NULL,
+    [value] [nvarchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [UI_idProduct] ON [dbo].[Products]
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+-- CREACION TABLA PRODUCTSCLIENT
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProductsClient]
+(
+    [id] [nvarchar](70) NOT NULL,
+    [clientId] [nvarchar](70) NULL,
+    [productId] [int] NULL,
+    [ammount] [int] NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+ALTER TABLE [dbo].[ProductsClient] ADD PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[ProductsClient]  WITH CHECK ADD FOREIGN KEY([clientId])
+REFERENCES [dbo].[Clients] ([id])
+GO
+ALTER TABLE [dbo].[ProductsClient]  WITH CHECK ADD FOREIGN KEY([productId])
+REFERENCES [dbo].[Products] ([id])
+GO
