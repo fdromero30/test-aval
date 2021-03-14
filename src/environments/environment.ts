@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyCEpWll8fdMz-YRgViqAxa-DwQ5P4DP-2A",
-    authDomain: "aval-test-584ae.firebaseapp.com",
-    projectId: "aval-test-584ae",
-    storageBucket: "aval-test-584ae.appspot.com",
-    messagingSenderId: "627938294772",
-    appId: "1:627938294772:web:7d314288a19cc80abd17a1"
+    apiKey: 'AIzaSyCEpWll8fdMz-YRgViqAxa-DwQ5P4DP-2A',
+    authDomain: 'aval-test-584ae.firebaseapp.com',
+    projectId: 'aval-test-584ae',
+    storageBucket: 'aval-test-584ae.appspot.com',
+    messagingSenderId: '627938294772',
+    appId: '1:627938294772:web:7d314288a19cc80abd17a1'
   }
 };
 
