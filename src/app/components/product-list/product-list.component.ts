@@ -4,6 +4,8 @@ import { Product } from 'src/app/models/product.model';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouteConstants } from 'src/app/utils/route-constants';
+import { ProducClientService } from 'src/app/services/productClient.service';
+import { ProductClient } from 'src/app/models/productClient.model';
 
 
 @Component({
@@ -16,7 +18,7 @@ export class ProductListComponent implements OnInit {
   listProducts: Product[];
   typeUser: any;
   constructor(private productService: ProductService, private router: Router,
-    private authService: AuthService) {
+    private authService: AuthService, private productClientService: ProducClientService) {
     this.listProducts = [];
     this.getProductList();
   }
@@ -46,13 +48,24 @@ export class ProductListComponent implements OnInit {
    * 
    * @param item 
    */
-  buyProduct(item) {
+  buyProduct(item: Product) {
 
 
     if (JSON.parse(localStorage.getItem('autenticated'))) {
       const r = confirm('Esta seguro de comprar este producto');
       if (r) {
         console.log(JSON.stringify(item))
+        let productClient = new ProductClient();
+
+
+        productClient.ammount = item.ammount;
+        productClient.clientId = this.authService.userFromDB.id;
+        productClient.productId = item.id;
+        productClient.id = `${productClient.productId}${productClient.clientId}${Date.now().toString()}`
+
+        this.productClientService.buyProduct(productClient).subscribe(res => {
+          alert("Compra realizada con exito");
+        });
       }
     } else {
       alert('Debes Ingresar para realizar la compra');
@@ -71,9 +84,7 @@ export class ProductListComponent implements OnInit {
    * 
    */
   editProduct(item) {
-
     this.router.navigate([RouteConstants.CREATE_PRODUCT_PATH], { queryParams: { id: item.id } })
-
   }
 
   /**
@@ -87,6 +98,14 @@ export class ProductListComponent implements OnInit {
         this.getProductList();
       });
     }
+  }
+
+
+  /**
+   * 
+   */
+  navigateToBuys() {
+    this.router.navigate([RouteConstants.USER_BUYS_PATH], { queryParams: { id: this.authService.userFromDB.id } });
   }
 
   /**

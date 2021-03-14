@@ -2,12 +2,16 @@
     <div class="row">
         <div class="col col-12 ">
             <h1 class="float-left">
-                Products!
+                Productos!
             </h1>
             <button class="btn btn-primary float-right" *ngIf="typeUser == 'Administrador'"
                 (click)="navigateToCreateProduct()">
                 <i class="fas fa-plus"></i> Crear Nuevo Producto
             </button>
+            <button class="btn btn-primary float-right" *ngIf="typeUser == 'Cliente'"
+            (click)="navigateToBuys()">
+            <i class="fas fa-shopping-cart"></i> Ver mis compras
+        </button>
         </div>
     </div>
     <div class="row list--products">
@@ -40,7 +44,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 float-right" style="position: absolute; right: 0;">
                     <button class="btn btn-primary float-right" (click)="buyProduct(item)" [disabled]="item.ammount < 1"
                         *ngIf="typeUser != 'Administrador' && typeUser"><i
-                            class="fas fa-cart-arrow-down"></i>Buy</button>
+                            class="fas fa-cart-arrow-down"></i>Comprar</button>
                     <button class="btn btn-primary float-right" (click)="editProduct(item)"
                         *ngIf="typeUser == 'Administrador'"><i class="fas fa-cart-arrow-down"></i>Editar</button>
                     <button class="btn btn-danger float-right" (click)="deleteProduct(item)"

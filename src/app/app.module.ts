@@ -18,6 +18,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { AuthGuardService } from './guards/auth.guard';
 import { CreateProductComponent } from './components/create-product/create-product.component';
+import { UserProductsComponent } from './components/user-products/user-products.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CreateProductComponent } from './components/create-product/create-produ
     LoginComponent,
     SigninComponent,
     EditUserComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    UserProductsComponent
   ],
   imports: [
     BrowserModule,

@@ -27,6 +27,10 @@ export class UserService {
 
         return this.http.post('/api/Client/', user);
     }
+    /**
+     * edit user info
+     * @param user 
+     */
     editUser(user: Client) {
         return this.http.put(`/api/Client/${user.id}`, user);
     }

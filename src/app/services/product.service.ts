@@ -13,14 +13,14 @@ export class ProductService {
   url = '/api/Products/';
 
   /***
-   * 
+   * get product list
    */
   getProductService() {
     return this.http.get(this.url);
   }
 
   /**
-   * 
+   * get product info by id
    * @param id 
    */
   getProductById(id) {
@@ -28,7 +28,7 @@ export class ProductService {
   }
 
   /**
-   * 
+   * delete product by id
    * @param id 
    */
   deleteProduct(id) {
@@ -36,7 +36,7 @@ export class ProductService {
   }
 
   /**
-   * 
+   * update product info by id
    * @param product 
    */
   updateProduct(product: Product) {
@@ -45,7 +45,7 @@ export class ProductService {
   }
 
   /**
-   * 
+   * create new product 
    * @param product 
    */
   createProduct(product: Product) {
