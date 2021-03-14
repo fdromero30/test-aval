@@ -222,7 +222,7 @@ export class AuthService {
      */
     mapTypeUser(type) {
 
-        if (type == '1') {
+        if (type == '0') {
             this.typeUser = "Administrador";
         } else {
             this.typeUser = "Cliente";

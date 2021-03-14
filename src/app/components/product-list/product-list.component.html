@@ -4,7 +4,8 @@
             <h1 class="float-left">
                 Products!
             </h1>
-            <button class="btn btn-primary float-right" *ngIf="typeUser == 'Administrador'" (click)="navigateToCreateProduct()">
+            <button class="btn btn-primary float-right" *ngIf="typeUser == 'Administrador'"
+                (click)="navigateToCreateProduct()">
                 <i class="fas fa-plus"></i> Crear Nuevo Producto
             </button>
         </div>
@@ -18,15 +19,26 @@
                     <label class="product--title col-12">{{item.name}}</label>
                     <label class="product--description col-12">{{item.description}}</label></p>
                 <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12"><strong class="col-12">Valor:
-                    </strong>{{item.value}} $</p>
-                <form class="col-lg-3 col-md-3 col-xs-12 col-sm-12 form-quantity" *ngIf="typeUser != 'Administrador'">
-                    <button class="btn btn-outline-black col-lg-2 col-md-2 col-sm-6 col-xs-6">+</button>
-                    <button class="btn btn-outline-black col-lg-2 col-md-2 col-sm-6 col-xs-6">-</button>
-                    <input class="form-control col-lg-6 col-md-6 col-sm-6 col-xs-6 float-right"
+                    </strong>{{item.value}}$</p>
+
+                <strong>Cantidad:</strong>
+
+                <form class="col-lg-3 col-md-3 col-xs-12 col-sm-12 form-quantity" name="form" id="formAmmount"
+                    *ngIf="typeUser != 'Administrador'">
+
+                    <input class="form-control col-lg-6 col-md-6 col-sm-6 col-xs-6 float-left"
                         [(ngModel)]="item.ammount" type="number" name="ammount">
+
+
+                    <button class="btn btn-outline-black col-lg-2 col-md-2 col-sm-6 col-xs-6"
+                        (click)="changeAmmount('subs', item)">-</button>
+                    <button class="btn btn-outline-black col-lg-2 col-md-2 col-sm-6 col-xs-6"
+                        (click)="changeAmmount('add', item)">+</button>
+                    <p *ngIf="item.ammount < 1 && item.ammount < 0" class="col-12 row mt-1"> El valor debe ser mayor a
+                        0!</p>
                 </form>
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 float-right" style="position: absolute; right: 0;">
-                    <button class="btn btn-primary float-right" (click)="buyProduct(item)"
+                    <button class="btn btn-primary float-right" (click)="buyProduct(item)" [disabled]="item.ammount < 1"
                         *ngIf="typeUser != 'Administrador' && typeUser"><i
                             class="fas fa-cart-arrow-down"></i>Buy</button>
                     <button class="btn btn-primary float-right" (click)="editProduct(item)"

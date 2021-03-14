@@ -35,11 +35,6 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(10), Validators.email]],
       password: ['', [Validators.required], []]
     });
-
-    this.form.valueChanges
-      .pipe(debounceTime(500)).subscribe(val => {
-        console.log(val);
-      });
   }
 
   /**
@@ -50,8 +45,7 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     this.auth
       .loginUserEmail(this.form.get('email').value, this.form.get('password').value)
-      .then((res) => {
-        console.log(res, "succesfylly login!");
+      .then((_res) => {
         this.router.navigate(['']);
       });
   }
@@ -64,8 +58,7 @@ export class LoginComponent implements OnInit {
   onLoginGoogle(): void {
     this.auth
       .loginUserGmail()
-      .then((res) => {
-        console.log(res);
+      .then((_res) => {
         this.router.navigate(['']);
       })
       .catch((err) => {

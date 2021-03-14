@@ -66,24 +66,36 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   */
   editProduct() {
 
-    this.product.value = this.product.value.toString();
-    this.productService.updateProduct(this.product).subscribe(res => {
-      alert('se ha actualizado el producto');
-      this.router.navigate([RouteConstants.PRODUCT_LIST_PATH]);
-      console.log(res);
-    })
+    const r = confirm("Desea confirmar la edicion del producto");
+    if (r) {
+      this.product.value = this.product.value.toString();
+      this.productService.updateProduct(this.product).subscribe(res => {
+        alert('se ha actualizado el producto');
+        this.router.navigate([RouteConstants.PRODUCT_LIST_PATH]);
+      })
+    }
   }
 
+
+  /**
+   * 
+   */
   createProduct() {
 
-    this.product.value = this.product.value.toString();
-    this.productService.createProduct(this.product).subscribe(res => {
-      alert('se ha creado el producto');
-      this.router.navigate([RouteConstants.PRODUCT_LIST_PATH]);
-      console.log(res);
-    })
+    const r = confirm("Desea continuar con la creacion del producto");
+    if (r) {
+      this.product.value = this.product.value.toString();
+      this.productService.createProduct(this.product).subscribe(res => {
+        alert('se ha creado el producto');
+        this.router.navigate([RouteConstants.PRODUCT_LIST_PATH]);
+  
+      })
+    }
   }
 
   cancel() {

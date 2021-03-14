@@ -40,11 +40,6 @@ export class SigninComponent implements OnInit {
       firstLastName: ['', [Validators.required]],
       secondLastName: [''],
     });
-
-    this.form.valueChanges
-      .pipe(debounceTime(500)).subscribe(val => {
-        console.log(val);
-      });
   }
 
   /**
@@ -54,8 +49,7 @@ export class SigninComponent implements OnInit {
   onLoginGoogle(): void {
     this.auth
       .loginUserGmail()
-      .then((res) => {
-        console.log(res);
+      .then((_res) => {
         this.router.navigate(['']);
       })
       .catch((err) => {
@@ -73,8 +67,7 @@ export class SigninComponent implements OnInit {
       .then((res: any) => {
         this.user.id = res.user.uid;
         this.user.tipoUsuario = '1';
-        this.userService.createUser(this.user).subscribe(res => {
-          console.log(res);
+        this.userService.createUser(this.user).subscribe(_res => {
           this.router.navigate(['']);
         }, err => {
           console.log(err);

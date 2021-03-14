@@ -17,8 +17,6 @@ export class EditUserComponent implements OnInit {
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private userService: UserService) {
     this.buildForm();
-
-    console.log(this.user);
   }
 
   ngOnInit(): void {
@@ -38,13 +36,6 @@ export class EditUserComponent implements OnInit {
       documento: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(10)]],
       telefono: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(10)]]
     });
-
-    this.form.valueChanges
-      .pipe(debounceTime(500)).subscribe(val => {
-        console.log(val);
-      });
-
-
     setTimeout(() => {
       this.buildUserInfo();
     }, 1);

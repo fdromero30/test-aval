@@ -13,7 +13,7 @@
                             <label>Nombre:</label>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input id="nombreProducto" type="text" class="form-control" formControlName="nombreProducto"
-                                name="nombreProducto" value="" placeholder="Nombre Producto" [(ngModel)]="product.name">
+                                name="nombreProducto" placeholder="Nombre Producto" [(ngModel)]="product.name">
                         </p>
                         <p *ngIf="form.get('nombreProducto').errors  && form.get('nombreProducto').dirty"
                             class="col-12">
@@ -44,7 +44,7 @@
                 <div class=" col-12 input-group mt-4">
                     <p class="col-12">
                         <button class="btn btn-primary float-right" (click)="saveForm()"
-                        [disabled]="form.invalid">Guardar</button>
+                            [disabled]="form.invalid">Guardar</button>
                         <button class="btn btn-danger float-right mr-2" (click)="cancel()">Cancelar</button>
                     </p>
                 </div>
