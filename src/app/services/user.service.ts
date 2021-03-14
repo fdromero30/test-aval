@@ -24,8 +24,6 @@ export class UserService {
      * @param user 
      */
     createUser(user: Client) {
-
-        debugger;
         return this.http.post('/api/Client/', user);
     }
     /**

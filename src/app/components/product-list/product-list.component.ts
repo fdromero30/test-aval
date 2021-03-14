@@ -65,6 +65,7 @@ export class ProductListComponent implements OnInit {
 
         this.productClientService.buyProduct(productClient).subscribe(res => {
           alert("Compra realizada con exito");
+          this.navigateToBuys();
         });
       }
     } else {

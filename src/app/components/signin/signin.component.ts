@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router,
     private userService: UserService, private spinner: NgxSpinnerService) {
-    this.user = new Client();
+    this.user = new Client('','','','','','');
   }
 
   ngOnInit(): void {
@@ -98,6 +98,7 @@ export class SigninComponent implements OnInit {
 
         this.userService.createUser(this.user).subscribe(_res => {
           this.router.navigate(['']);
+          this.auth.mapUserInfoFromDB();
           this.spinner.hide();
         }, err => {
           console.log(err);

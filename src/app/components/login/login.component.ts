@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   user: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService, private spinner: NgxSpinnerService) {
     this.buildForm();
   }
 
@@ -42,12 +43,14 @@ export class LoginComponent implements OnInit {
    * @author fromero
    */
   onLogin(): void {
+    this.spinner.show()
     event.preventDefault();
     this.auth
       .loginUserEmail(this.form.get('email').value, this.form.get('password').value)
       .then((_res) => {
+        this.spinner.hide();
         this.router.navigate(['']);
-      });
+      }).catch(_err => { this.spinner.hide() });
   }
 
 

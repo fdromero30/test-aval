@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
+import { RouteConstants } from 'src/app/utils/route-constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,7 +17,8 @@ export class EditUserComponent implements OnInit {
   user: any;
   form: FormGroup;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private userService: UserService) {
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private userService: UserService,
+    private router: Router) {
     this.buildForm();
   }
 
@@ -71,4 +74,11 @@ export class EditUserComponent implements OnInit {
     );
   }
 
+
+  /**
+   * 
+   */
+  navigateToProducts() {
+    this.router.navigate([RouteConstants.PRODUCT_LIST_PATH]);
+  }
 }
