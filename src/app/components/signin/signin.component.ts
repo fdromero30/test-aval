@@ -54,21 +54,33 @@ export class SigninComponent implements OnInit {
         this.spinner.show();
         this.user.id = _res.user.uid;
         this.user.tipoUsuario = '1';
-        this.user.primerNombre = _res.user.displayName.split(' ')[0];
-        this.user.segundoNombre = _res.user.displayName.split(' ')[1];
-        this.user.primerApellido = _res.user.displayName.split(' ')[2];
+        this.user.primerNombre = _res.user.displayName.split(' ')[0] ? _res.user.displayName.split(' ')[0] : '';
+        this.user.segundoNombre = _res.user.displayName.split(' ')[1] ? _res.user.displayName.split(' ')[1] : '';
+        this.user.primerApellido = _res.user.displayName.split(' ')[2] ? _res.user.displayName.split(' ')[2] : '';
         this.user.segundoApellido = _res.user.displayName.split(' ')[3] ? _res.user.displayName.split(' ')[3] : '';
         this.user.cedula = '';
         this.userService.createUser(this.user).subscribe(_res => {
 
+          this.auth.mapUserInfoFromDB();
           this.router.navigate(['']);
           this.spinner.hide();
         }, err => {
           console.log(err);
+          this.spinner.hide();
+
+          if(err.status == 409){
+            this.auth.logOutUser();
+            alert('Ya existe un usario con este correo');
+          }else{
+            alert('Ha ocurrido un error, vuelve a intentarlo');
+          }
+      
         });
       })
       .catch((err) => {
+        this.spinner.hide();
         console.log("err", JSON.parse(err));
+        alert('Ha ocurrido un error con el servidor de Firebase, vuelve a intentarlo');
       });
   }
 

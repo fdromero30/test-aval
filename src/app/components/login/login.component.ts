@@ -55,10 +55,12 @@ export class LoginComponent implements OnInit {
    * @author fromero
    * autenticación con google
    */
-  onLoginGoogle(): void {
-    this.auth
+  async onLoginGoogle() {
+    await this.auth
       .loginUserGmail()
       .then((_res) => {
+        debugger;
+        this.auth.mapUserInfoFromDB();
         this.router.navigate(['']);
       })
       .catch((err) => {

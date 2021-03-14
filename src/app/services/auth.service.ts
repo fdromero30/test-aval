@@ -111,7 +111,7 @@ export class AuthService {
             this.afsAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider()).then(
                 (userData) => {
                     this.user = userData;
-                    this.mapUserInfoFromDB();
+                    // this.mapUserInfoFromDB();
                     resolve(userData);
                 },
                 (err) => reject(this.signInWithCredential(err))
@@ -173,12 +173,12 @@ export class AuthService {
      */
 
     logOutUser() {
-  
+
         localStorage.clear();
         this.router.navigate(['login']);
         this.afsAuth.signOut();
         this.user = null;
-        this.typeUser ='no-user';
+        this.typeUser = 'no-user';
         this.authenticated.next(false);
 
     }
@@ -190,7 +190,7 @@ export class AuthService {
     isAuth() {
         return this.afsAuth.authState.pipe(map((auth) => auth));
     }
-    
+
     /**
      *
      */
@@ -203,11 +203,11 @@ export class AuthService {
     /**
      * 
      */
-    mapUserInfoFromDB() {
+    async mapUserInfoFromDB() {
 
         if (this.user && this.user.user) {
-            this.userService.getUser(this.user.user.uid).subscribe((res: Client) => {
-           
+            await this.userService.getUser(this.user.user.uid).subscribe((res: Client) => {
+
                 this.userFromDB = res;
                 this.mapTypeUser(this.userFromDB.tipoUsuario);
                 this.user.displayName = `${res.primerNombre} ${res.segundoNombre} ${res.primerApellido} ${res.segundoApellido}`;

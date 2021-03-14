@@ -27,7 +27,7 @@
                             <label>Valor Unitario:</label>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                             <input id="productValue" type="number" class="form-control" name="productValue"
-                                formControlName="productValue" placeholder="Documento de Identidad"
+                                formControlName="productValue" placeholder="Valor del producto"
                                 [(ngModel)]="product.value">
                         </p>
                         <p *ngIf="form.get('productValue').errors  && form.get('productValue').dirty" class="col-12">
