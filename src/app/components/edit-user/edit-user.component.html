@@ -1,0 +1,78 @@
+<div class="container">
+
+    <h1 class="mb-4">Editar Usuario</h1>
+    <form class="col-12 row" [formGroup]="form" name="form" id="form" class="form-horizontal"
+        enctype="multipart/form-data">
+
+
+        <div class="col-6 float-left">
+            <div class="input-group">
+                <p class="col-12">
+                    <label class="mb-3">Email:</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="email" type="text" class="form-control" formControlName="email" name="email" value=""
+                        placeholder="Email" disabled [(ngModel)]="user.email">
+                </p>
+            </div>
+            <div class="input-group">
+                <p class="col-12">
+                    <label class="mb-3">Primer Nombre:</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="primerNombre" type="text" class="form-control" formControlName="primerNombre" name="primerNombre"
+                        placeholder="Primer Nombre" [(ngModel)]="user.primerNombre">
+                </p>
+            </div>
+
+            <div class="input-group">
+                <p class="col-12">
+                    <label class="mb-3">Segundo Nombre:</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="segundoNombre" type="text" class="form-control" formControlName="segundoNombre" name="segundoNombre" value=""
+                        placeholder="Segundo Nombre" [(ngModel)]="user.segundoNombre">
+                </p>
+            </div>
+            <div class="input-group">
+                <p class="col-12">
+                    <label class="mb-3">Telefono:</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="telefono" type="number" class="form-control" formControlName="telefono" name="telefono" value=""
+                        placeholder="Telefono" [(ngModel)]="user.telefono">
+                </p>
+            </div>
+        </div>
+        <div class="col-6 float-right">
+            <div class="input-group">
+                <p class="col-12">
+                    <label class="mb-3">Primer Apellido:</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="primerApellido" type="text" class="form-control" formControlName="primerApellido" name="primerApellido" value=""
+                        placeholder="Primer Apellido" [(ngModel)]="user.primerApellido">
+                </p>
+            </div>
+
+            <div class="input-group">
+                <p class="col-12">
+                    <label class="mb-3">Segundo Apellido:</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="segundoApellido" type="text" class="form-control" formControlName="segundoApellido" name="segundoApellido" value=""
+                        placeholder="Segundo Apellido" [(ngModel)]="user.segundoApellido">
+                </p>
+            </div>
+
+            <div class="input-group">
+                <p class="col-12">
+                    <label class="mb-3">Cedula:</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="documento" type="text" class="form-control" formControlName="documento" name="documento" value=""
+                        placeholder="Cedula" [(ngModel)]="user.cedula">
+                </p>
+            </div>
+            <div class="input-group" style="margin-top: 2rem;">
+                <p class="col-12">
+                    <button class="btn btn-primary float-right" (click)="saveForm()">Guardar</button>
+                </p>
+            </div>
+
+        </div>
+    </form>
+</div>

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { ProductService } from './services/product-service.service';
+import { ProductService } from './services/product.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,13 +15,16 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { SigninComponent } from './components/signin/signin.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { AuthGuardService } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
     LoginComponent,
-    SigninComponent
+    SigninComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { SigninComponent } from './components/signin/signin.component';
     , AngularFireModule.initializeApp(environment.firebaseConfig)
 
   ],
-  providers: [ProductService, AuthService],
+  providers: [ProductService, AuthService, AuthGuardService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

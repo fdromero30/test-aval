@@ -18,17 +18,22 @@ export class AppComponent {
   title = 'test-aval';
   autenticated = false;
   user: User = new User();
+  displayName:any;
 
   constructor(private router: Router, private authService: AuthService) {
+
+   
     this.authService.authenticated.subscribe(val => {
       this.autenticated = val;
       this.mapUser();
     });
+    this.authService.mapUserInfoFromDB();
   }
 
   mapUser() {
     if (this.autenticated) {
       this.user = this.authService.user.user;
+      this.displayName = this.authService.user.displayName ?  this.authService.user.displayName :this.user.displayName;
     }
   }
 
@@ -52,5 +57,9 @@ export class AppComponent {
   logOut() {
 
     this.authService.logOutUser();
+  }
+
+  navigateToProfile(){
+    this.router.navigate([RouteConstants.PROFILE_PATH]);
   }
 }

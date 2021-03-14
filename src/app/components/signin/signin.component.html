@@ -1,6 +1,6 @@
 <div class="container">
 
-	<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+	<div id="loginbox">
 
 		<div class="row">
 			<div class="iconmelon">
@@ -16,100 +16,152 @@
 
 			<div class="panel-body">
 
-				<form [formGroup]="form" name="form" id="form" class="form-horizontal" enctype="multipart/form-data">
+				<form [formGroup]="form" name="form" id="form" enctype="multipart/form-data">
 
-					<div class="input-group">
-						<p class="col-12">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-							<input id="user" type="text" class="form-control" formControlName="email" name="email"
-								value="" placeholder="Email">
-						</p>
-						<p *ngIf="form.get('email').errors  && form.get('email').dirty" class="col-12">
+					<div class="col-6 float-left">
+						<div class="input-group">
+						
+							<p class="col-12">
+								<label>Email:</label>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input id="user" type="text" class="form-control" formControlName="email" name="email"
+									value="" placeholder="Email" [(ngModel)]="user.email">
+							</p>
+							<p *ngIf="form.get('email').errors  && form.get('email').dirty" class="col-12">
 
-							<small *ngIf="form.get('email').hasError('required')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
-							</small>
-							<small *ngIf="form.get('email').hasError('email')">
-								<ion-icon name="alert-circle-outline"></ion-icon> El campo debe ser tipo email
-								"alguien@matchsports.com"
-							</small>
-						</p>
-					</div>
-					<div class="input-group">
-						<p class="col-12">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-							<input id="documentUser" type="text" class="form-control" name="documentUser"
-								formControlName="documentUser" placeholder="Identity Document">
-						</p>
-						<p *ngIf="form.get('documentUser').errors  && form.get('documentUser').dirty" class="col-12">
+								<small *ngIf="form.get('email').hasError('required')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+								</small>
+								<small *ngIf="form.get('email').hasError('email')">
+									<ion-icon name="alert-circle-outline"></ion-icon> El campo debe ser tipo email
+									"alguien@matchsports.com"
+								</small>
+							</p>
+						</div>
+						<div class="input-group">
+							<p class="col-12">
+								<label>Documento:</label>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<input id="documentUser" type="text" class="form-control" name="documentUser"
+									formControlName="documentUser" placeholder="Documento de Identidad" [(ngModel)]="user.cedula">
+							</p>
+							<p *ngIf="form.get('documentUser').errors  && form.get('documentUser').dirty"
+								class="col-12">
 
-							<small *ngIf="form.get('documentUser').hasError('required')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
-							</small>
-							<small *ngIf="form.get('documentUser').hasError('maxlength')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Longitud maxima 50!
-							</small>
-							<small *ngIf="form.get('documentUser').hasError('minlength')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Longitud minima 10!
-							</small>
-						</p>
-					</div>
-					<div class="input-group">
-						<p class="col-12">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-							<input id="phone" type="text" class="form-control" name="phone" formControlName="phone"
-								placeholder="Phone">
-						</p>
-						<p *ngIf="form.get('phone').errors  && form.get('phone').dirty" class="col-12">
+								<small *ngIf="form.get('documentUser').hasError('required')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+								</small>
+								<small *ngIf="form.get('documentUser').hasError('maxlength')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Longitud maxima 50!
+								</small>
+								<small *ngIf="form.get('documentUser').hasError('minlength')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Longitud minima 10!
+								</small>
+							</p>
+						</div>
+						<div class="input-group">
+							<p class="col-12">
+								<label>Primer Nombre:</label>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input id="firstName" type="text" class="form-control" formControlName="firstName"
+									name="firstName" placeholder="Primer Nombre" [(ngModel)]="user.primerNombre">
+							</p>
+						</div>
 
-							<small *ngIf="form.get('phone').hasError('required')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
-							</small>
-						</p>
-					</div>
+						<div class="input-group">
+							<p class="col-12">
+								<label>Segundo Nombre:</label>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input id="secondName" type="text" class="form-control"
+									formControlName="secondName" name="secondName" value=""
+									placeholder="Segundo Nombre" [(ngModel)]="user.segundoNombre">
+							</p>
+						</div>
 
-					<div class="input-group">
-						<p class="col-12">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-							<input id="password" type="password" class="form-control" name="password"
-								formControlName="password" placeholder="Password">
-						</p>
-						<p *ngIf="form.get('password').errors  && form.get('password').dirty" class="col-12">
-
-							<small *ngIf="form.get('password').hasError('required')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
-							</small>
-							<small *ngIf="form.get('password').hasError('maxlength')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Longitud maxima 50!
-							</small>
-							<small *ngIf="form.get('password').hasError('minlength')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Debe contener al menos 6 caracteres!
-							</small>
-						</p>
-					</div>
-
-					<div class="input-group">
-						<p class="col-12">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-							<input id="copyPassword" type="password" class="form-control" name="copyPassword"
-								formControlName="copyPassword" placeholder="Confirm Password">
-						</p>
-						<p *ngIf="form.get('copyPassword').errors  && form.get('copyPassword').dirty" class="col-12">
-
-							<small *ngIf="form.get('copyPassword').hasError('required')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
-							</small>
-							<small *ngIf="form.get('copyPassword').hasError('maxlength')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Longitud maxima 50!
-							</small>
-							<small *ngIf="form.get('copyPassword').hasError('minlength')">
-								<ion-icon name="alert-circle-outline"></ion-icon> Debe contener al menos 6 caracteres!
-							</small>
-						</p>
+						<div class="input-group">
+							<p class="col-12">
+								<label>Primer Apellido:</label>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input id="firstLastName" type="text" class="form-control"
+									formControlName="firstLastName" name="firstLastName" value=""
+									placeholder="Primer Apellido" [(ngModel)]="user.primerApellido">
+							</p>
+						</div>
 					</div>
 
+					<div class="col-6 float-right">
 
-					<div class="form-group">
+						<div class="input-group">
+							<p class="col-12">
+								<label>Segundo Apellido:</label>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input id="secondLastName" type="text" class="form-control"
+									formControlName="secondLastName" name="secondLastName" value=""
+									placeholder="Segundo Apellido" [(ngModel)]="user.segundoApellido">
+							</p>
+						</div>
+						<div class="input-group">
+							<p class="col-12">
+								<label>Telefono:</label>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<input id="phone" type="text" class="form-control" name="phone" formControlName="phone"
+									placeholder="Phone" [(ngModel)]="user.telefono">
+							</p>
+							<p *ngIf="form.get('phone').errors  && form.get('phone').dirty" class="col-12">
+
+								<small *ngIf="form.get('phone').hasError('required')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+								</small>
+							</p>
+						</div>
+
+						<div class="input-group">
+							<p class="col-12">
+								<label>Contrasena:</label>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<input id="password" type="password" class="form-control" name="password"
+									formControlName="password" placeholder="Password">
+							</p>
+							<p *ngIf="form.get('password').errors  && form.get('password').dirty" class="col-12">
+
+								<small *ngIf="form.get('password').hasError('required')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+								</small>
+								<small *ngIf="form.get('password').hasError('maxlength')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Longitud maxima 50!
+								</small>
+								<small *ngIf="form.get('password').hasError('minlength')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Debe contener al menos 6
+									caracteres!
+								</small>
+							</p>
+						</div>
+
+						<div class="input-group">
+							<p class="col-12">
+								<label>Confirmar Contrasena:</label>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<input id="copyPassword" type="password" class="form-control" name="copyPassword"
+									formControlName="copyPassword" placeholder="Confirm Password">
+							</p>
+							<p *ngIf="form.get('copyPassword').errors  && form.get('copyPassword').dirty"
+								class="col-12">
+
+								<small *ngIf="form.get('copyPassword').hasError('required')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Campo Requerido!
+								</small>
+								<small *ngIf="form.get('copyPassword').hasError('maxlength')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Longitud maxima 50!
+								</small>
+								<small *ngIf="form.get('copyPassword').hasError('minlength')">
+									<ion-icon name="alert-circle-outline"></ion-icon> Debe contener al menos 6
+									caracteres!
+								</small>
+							</p>
+						</div>
+					</div>
+
+					<div class="form-group row col-12 form-buttons-control">
 						<!-- Button -->
 						<div class="col-sm-12 controls">
 							<button type="submit" href="#" class="btn btn-primary pull-right" (click)="onSignIn()"

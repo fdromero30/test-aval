@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product-service.service';
+import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product-list',
@@ -10,7 +12,7 @@ import { Product } from 'src/app/models/product.model';
 export class ProductListComponent implements OnInit {
 
   listProducts: Product[];
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router, private _modalService: NgbModal) {
     this.listProducts = [];
     this.getProductList();
   }
@@ -29,6 +31,13 @@ export class ProductListComponent implements OnInit {
   }
 
   buyProduct(item) {
-    console.log(JSON.stringify(item))
+
+    if (JSON.parse(localStorage.getItem('autenticated'))) {
+      console.log(JSON.stringify(item))
+    } else {
+      alert('Debes Ingresar para realizar la compra');
+      this.router.navigate(['login']);
+    }
   }
+
 }

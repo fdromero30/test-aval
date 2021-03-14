@@ -10,6 +10,7 @@ export class AuthGuardService implements CanActivate {
         const au = localStorage.getItem('autenticated');
 
         if (!au) {
+            alert('su sesion ha expirado');
             this.router.navigate(['login']);
             return false;
         }

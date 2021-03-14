@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="container-fluid">
-    <img src="assets/shop.png" (click)="goToHome()" ngbTooltip="ver Productos" >
+    <img src="assets/shop.png" (click)="goToHome()" ngbTooltip="ver Productos">
 
     <div *ngIf="!autenticated">
       <button class="btn btn-outline-dark" type="submit" (click)="logIn()">Log In</button>
@@ -8,12 +8,16 @@
 
     </div>
     <div *ngIf="autenticated" class="user-autenticated">
-
-      <label class="ml-2">{{user.displayName}}</label>
-      <img src="{{user.photoURL}}" class="ml-2">
       <button class="btn btn-outline-dark ml-2" type="submit" (click)="logOut()" ngbTooltip="logOut" title="log Out">
         <i class="fas fa-sign-out-alt"></i>
       </button>
+      <label class="ml-2" ngbTooltip="Editar Usuario" (click)="navigateToProfile()">{{displayName}}</label>
+      <img ngbTooltip="Editar Usuario" *ngIf="user.photoURL" src="{{user.photoURL}}" class="ml-2"
+        (click)="navigateToProfile()">
+      <img ngbTooltip="Editar Usuario" *ngIf="!user.photoURL" (click)="navigateToProfile()"
+        src="https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png" class="ml-2"
+        (click)="navigateToProfile()">
+
     </div>
 
 

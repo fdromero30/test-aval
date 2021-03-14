@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import * as firebase from "firebase";
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
+import { UserService } from './user.service';
+import { Client } from '../models/client.model';
 
 
 export class FirebaseErrorconstants {
@@ -22,12 +24,13 @@ export class AuthService {
     authenticated: BehaviorSubject<boolean>;
     email: any;
     user: any;
+    userFromDB: any;
     supportedPopupSignInMethods = [
         firebase.default.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.default.auth.FacebookAuthProvider.PROVIDER_ID,
     ];
 
-    constructor(private afsAuth: AngularFireAuth, private router: Router) {
+    constructor(private afsAuth: AngularFireAuth, private router: Router, private userService: UserService) {
         this.user = new User();
         this.authenticated = new BehaviorSubject<boolean>(false);
         this.isAuthenticated();
@@ -72,7 +75,8 @@ export class AuthService {
             this.afsAuth.signInWithEmailAndPassword(email, password).then(
                 (userData) => {
                     this.user = userData;
-                    this.saveUserStorage();
+                    // this.saveUserStorage();
+                    this.mapUserInfoFromDB();
                     resolve(userData);
                 },
                 (err) => reject(this.signInWithCredential(err))
@@ -98,7 +102,7 @@ export class AuthService {
             this.afsAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider()).then(
                 (userData) => {
                     this.user = userData;
-                    this.saveUserStorage();
+                    this.mapUserInfoFromDB();
                     resolve(userData);
                 },
                 (err) => reject(this.signInWithCredential(err))
@@ -184,6 +188,21 @@ export class AuthService {
         localStorage.setItem('autenticated', 'true');
     }
 
+    /**
+     * 
+     */
+    mapUserInfoFromDB() {
+
+        if (this.user && this.user.user) {
+            this.userService.getUser(this.user.user.uid).subscribe((res: Client) => {
+
+                this.userFromDB = res;
+                this.user.displayName = `${res.primerNombre} ${res.segundoNombre} ${res.primerApellido} ${res.segundoApellido}`;
+                this.saveUserStorage();
+            })
+        }
+
+    }
     /**
      * obtiene el provider de autenticacion de firebase
      * @param providerId

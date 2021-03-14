@@ -12,7 +12,7 @@ export class ProductService {
 
   getProductService(){
 
-    return this.http.get('https://localhost:5001/api/Product/');
+    return this.http.get('/api/Products/');
 
   }
 }

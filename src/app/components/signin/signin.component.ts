@@ -3,6 +3,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { Client } from 'src/app/models/client.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signin',
@@ -12,7 +14,12 @@ import { debounceTime } from 'rxjs/operators';
 export class SigninComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router) { }
+  user: Client;
+
+  constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router,
+    private userService: UserService) {
+    this.user = new Client();
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -27,7 +34,11 @@ export class SigninComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6),], []],
       copyPassword: ['', [Validators.required, Validators.minLength(6),], []],
       documentUser: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
+      phone: [''],
+      firstName: ['', [Validators.required]],
+      secondName: [''],
+      firstLastName: ['', [Validators.required]],
+      secondLastName: [''],
     });
 
     this.form.valueChanges
@@ -59,9 +70,16 @@ export class SigninComponent implements OnInit {
   onSignIn() {
 
     this.auth.registerUserEmail(this.form.get('email').value, this.form.get('password').value)
-      .then((res) => {
-        console.log(res, "succesfylly Register!");
-        this.router.navigate(['']);
+      .then((res: any) => {
+        this.user.id = res.user.uid;
+        this.user.tipoUsuario = '1';
+        this.userService.createUser(this.user).subscribe(res => {
+          console.log(res);
+          this.router.navigate(['']);
+        }, err => {
+          console.log(err);
+        });
+
       });
   }
 
