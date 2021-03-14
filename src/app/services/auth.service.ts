@@ -25,7 +25,7 @@ export class AuthService {
     email: any;
     user: any;
     userFromDB: any;
-    typeUser: any;
+    typeUser: any = 'no-user';
     supportedPopupSignInMethods = [
         firebase.default.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.default.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -173,11 +173,13 @@ export class AuthService {
      */
 
     logOutUser() {
-        this.authenticated.next(false);
+  
         localStorage.clear();
         this.router.navigate(['login']);
         this.afsAuth.signOut();
         this.user = null;
+        this.typeUser ='no-user';
+        this.authenticated.next(false);
 
     }
 

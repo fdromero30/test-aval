@@ -9,10 +9,28 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
 
+  url = '/api/Products/';
 
+  /***
+   * 
+   */
   getProductService(){
+    return this.http.get(this.url);
+  }
 
-    return this.http.get('/api/Products/');
+  /**
+   * 
+   * @param id 
+   */
+  deleteProduct(id){
+    return this.http.delete(`${this.url}${id}`);
+  }
+  /**
+   * 
+   * @param product 
+   */
+  updateProduct(product){
+    return this.http.put(this.url, product);
 
   }
 }

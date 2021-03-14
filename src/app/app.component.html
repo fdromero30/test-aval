@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <img src="assets/shop.png" (click)="goToHome()" ngbTooltip="ver Productos">
 
-    <div>
+    <div *ngIf="typeUser == 'Administrador'">
       {{typeUser}}
     </div>
 

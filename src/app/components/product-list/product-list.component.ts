@@ -34,7 +34,7 @@ export class ProductListComponent implements OnInit {
       });
       setTimeout(() => {
         this.typeUser = this.authService.typeUser;
-      }, 1);
+      }, 0);
     })
   }
 
