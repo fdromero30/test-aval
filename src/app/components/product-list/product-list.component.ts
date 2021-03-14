@@ -4,7 +4,7 @@ import { Product } from 'src/app/models/product.model';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouteConstants } from 'src/app/utils/route-constants';
-import { ProducClientService } from 'src/app/services/productClient.service';
+import { ProductClientService } from 'src/app/services/productClient.service';
 import { ProductClient } from 'src/app/models/productClient.model';
 
 
@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit {
   listProducts: Product[];
   typeUser: any;
   constructor(private productService: ProductService, private router: Router,
-    private authService: AuthService, private productClientService: ProducClientService) {
+    private authService: AuthService, private productClientService: ProductClientService) {
     this.listProducts = [];
     this.getProductList();
   }

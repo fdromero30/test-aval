@@ -1,1 +1,25 @@
-<p>user-products works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col col-12 ">
+            <h1 class="float-left">
+                Mis Commpras!
+            </h1>
+        </div>
+    </div>
+    <div class="row list--products">
+        <div class="row col-12 mb-4 mt-4 item--title">
+        </div>
+        <div *ngFor="let item of listProducts" class="col-12 product-card">
+            <div class="row">
+                <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <label class="product--title col-12">{{item.nombre}}</label>
+                <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12"><strong class="col-12">Valor Total:
+                    </strong>{{item.value}}$</p>
+                <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12"><strong class="col-12">Valor Unitario:
+                    </strong>{{item.precio}}$</p>
+                <p>
+                    <strong>Cantidad:</strong>{{item.cantidad}}
+                </p>
+            </div>
+        </div>
+    </div>

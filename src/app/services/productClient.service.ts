@@ -5,7 +5,7 @@ import { ProductClient } from '../models/productClient.model';
 @Injectable({
     providedIn: 'root'
 })
-export class ProducClientService {
+export class ProductClientService {
 
     constructor(private http: HttpClient) { }
 
@@ -18,5 +18,9 @@ export class ProducClientService {
      */
     buyProduct(productClient: ProductClient) {
         return this.http.post(this.url, productClient);
+    }
+
+    getClientProducts(id){
+        return this.http.get(`${this.url}${id}/productsClient`);
     }
 }
