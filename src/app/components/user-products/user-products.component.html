@@ -2,8 +2,11 @@
     <div class="row">
         <div class="col col-12 ">
             <h1 class="float-left">
-                Mis Commpras!
+                Mis Compras!
             </h1>
+            <button class="btn btn-primary float-right" (click)="navigateToHome()">
+                <i class="fas fa-shopping-cart"></i> Volver a comprar
+            </button>
         </div>
     </div>
     <div class="row list--products">
@@ -12,14 +15,17 @@
         <div *ngFor="let item of listProducts" class="col-12 product-card">
             <div class="row">
                 <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <label class="product--title col-12">{{item.nombre}}</label>
+                    <label class="product--title col-12 titulo-producto">{{item.nombre}}</label>
                 <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12"><strong class="col-12">Valor Total:
                     </strong>{{item.value}}$</p>
                 <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12"><strong class="col-12">Valor Unitario:
                     </strong>{{item.precio}}$</p>
-                <p>
-                    <strong>Cantidad:</strong>{{item.cantidad}}
+                <p class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <strong class="col-12">Cantidad:</strong>{{item.cantidad}}
                 </p>
             </div>
+        </div>
+        <div *ngIf="listProducts.length < 1">
+            No Existen Productos Disponibles en este momento.
         </div>
     </div>

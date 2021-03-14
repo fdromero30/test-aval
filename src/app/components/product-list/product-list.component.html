@@ -8,10 +8,9 @@
                 (click)="navigateToCreateProduct()">
                 <i class="fas fa-plus"></i> Crear Nuevo Producto
             </button>
-            <button class="btn btn-primary float-right" *ngIf="typeUser == 'Cliente'"
-            (click)="navigateToBuys()">
-            <i class="fas fa-shopping-cart"></i> Ver mis compras
-        </button>
+            <button class="btn btn-primary float-right" *ngIf="typeUser == 'Cliente'" (click)="navigateToBuys()">
+                <i class="fas fa-list"></i> Ver mis compras
+            </button>
         </div>
     </div>
     <div class="row list--products">
@@ -51,5 +50,8 @@
                         *ngIf="typeUser == 'Administrador'"><i class="fas fa-cart-arrow-down"></i>Eliminar</button>
                 </div>
             </div>
+        </div>
+        <div *ngIf="listProducts.length < 1">
+            No Existen Productos Disponibles en este momento.
         </div>
     </div>
