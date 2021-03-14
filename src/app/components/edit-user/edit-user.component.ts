@@ -74,9 +74,8 @@ export class EditUserComponent implements OnInit {
     this.user.telefono = typeof this.user.telefono == 'string' ? this.user.telefono : this.user.telefono.toString();
     this.userService.editUser(this.user).subscribe(
       res => {
-        console.log(res);
         alert('Usuario modificado con exito');
-        this.buildUserInfo();
+        this.authService.mapUserInfoFromDB();
       }
     );
   }

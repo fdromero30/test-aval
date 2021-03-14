@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,13 +13,17 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ProductListComponent implements OnInit {
 
   listProducts: Product[];
-  constructor(private productService: ProductService, private router: Router, private _modalService: NgbModal) {
+  typeUser: any;
+  constructor(private productService: ProductService, private router: Router, private _modalService: NgbModal,
+    private authService: AuthService) {
     this.listProducts = [];
     this.getProductList();
   }
 
   ngOnInit(): void {
+
   }
+
 
   getProductList() {
 
@@ -27,6 +32,9 @@ export class ProductListComponent implements OnInit {
       res.forEach((element: Product) => {
         this.listProducts.push(new Product(element.id, element.name, element.description, element.value, 0))
       });
+      setTimeout(() => {
+        this.typeUser = this.authService.typeUser;
+      }, 1);
     })
   }
 

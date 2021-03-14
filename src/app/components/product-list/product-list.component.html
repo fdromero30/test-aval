@@ -1,9 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="col col-12 ">
-            <h1>
+            <h1 class="float-left">
                 Products!
             </h1>
+            <button class="btn btn-primary float-right" *ngIf="typeUser == 'Administrador'">
+                <i class="fas fa-plus"></i> Crear Nuevo Producto
+            </button>
         </div>
     </div>
     <div class="row list--products">

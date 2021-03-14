@@ -2,6 +2,10 @@
   <div class="container-fluid">
     <img src="assets/shop.png" (click)="goToHome()" ngbTooltip="ver Productos">
 
+    <div>
+      {{typeUser}}
+    </div>
+
     <div *ngIf="!autenticated">
       <button class="btn btn-outline-dark" type="submit" (click)="logIn()">Log In</button>
       <button class="btn btn-danger ml-1" type="submit" (click)="register()">Sign In</button>

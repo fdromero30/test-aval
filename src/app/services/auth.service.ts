@@ -25,6 +25,7 @@ export class AuthService {
     email: any;
     user: any;
     userFromDB: any;
+    typeUser: any;
     supportedPopupSignInMethods = [
         firebase.default.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.default.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -34,6 +35,14 @@ export class AuthService {
         this.user = new User();
         this.authenticated = new BehaviorSubject<boolean>(false);
         this.isAuthenticated();
+    }
+
+    /**
+     * 
+     * @param param 
+     */
+    updateAuthenticated(param: boolean) {
+        this.authenticated.next(param);
     }
 
     // ...
@@ -195,11 +204,26 @@ export class AuthService {
 
         if (this.user && this.user.user) {
             this.userService.getUser(this.user.user.uid).subscribe((res: Client) => {
-
+           
                 this.userFromDB = res;
+                this.mapTypeUser(this.userFromDB.tipoUsuario);
                 this.user.displayName = `${res.primerNombre} ${res.segundoNombre} ${res.primerApellido} ${res.segundoApellido}`;
                 this.saveUserStorage();
             })
+        }
+
+    }
+
+    /**
+     * 
+     * @param type 
+     */
+    mapTypeUser(type) {
+
+        if (type == '1') {
+            this.typeUser = "Administrador";
+        } else {
+            this.typeUser = "Cliente";
         }
 
     }

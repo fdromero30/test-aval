@@ -14,18 +14,20 @@ import { User } from './models/user.model';
     // animation triggers go here
   ]
 })
-export class AppComponent {
+export class AppComponent{
   title = 'test-aval';
   autenticated = false;
   user: User = new User();
-  displayName:any;
+  displayName: any;
+  typeUser: any;
 
   constructor(private router: Router, private authService: AuthService) {
 
-   
+
     this.authService.authenticated.subscribe(val => {
       this.autenticated = val;
       this.mapUser();
+      this.typeUser = this.authService.typeUser;
     });
     this.authService.mapUserInfoFromDB();
   }
@@ -33,7 +35,7 @@ export class AppComponent {
   mapUser() {
     if (this.autenticated) {
       this.user = this.authService.user.user;
-      this.displayName = this.authService.user.displayName ?  this.authService.user.displayName :this.user.displayName;
+      this.displayName = this.authService.user.displayName ? this.authService.user.displayName : this.user.displayName;
     }
   }
 
@@ -55,11 +57,10 @@ export class AppComponent {
   }
 
   logOut() {
-
     this.authService.logOutUser();
   }
 
-  navigateToProfile(){
+  navigateToProfile() {
     this.router.navigate([RouteConstants.PROFILE_PATH]);
   }
 }
