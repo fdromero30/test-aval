@@ -19,6 +19,7 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { AuthGuardService } from './guards/auth.guard';
 import { CreateProductComponent } from './components/create-product/create-product.component';
 import { UserProductsComponent } from './components/user-products/user-products.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,8 @@ import { UserProductsComponent } from './components/user-products/user-products.
     , FormsModule
     , ReactiveFormsModule
     , AngularFireModule.initializeApp(environment.firebaseConfig)
+    , NgxSpinnerModule
+
 
   ],
   providers: [ProductService, AuthService, AuthGuardService],

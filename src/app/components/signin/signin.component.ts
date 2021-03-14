@@ -5,6 +5,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { Client } from 'src/app/models/client.model';
 import { UserService } from 'src/app/services/user.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +18,7 @@ export class SigninComponent implements OnInit {
   user: Client;
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router,
-    private userService: UserService) {
+    private userService: UserService, private spinner: NgxSpinnerService) {
     this.user = new Client();
   }
 
@@ -49,8 +50,22 @@ export class SigninComponent implements OnInit {
   onLoginGoogle(): void {
     this.auth
       .loginUserGmail()
-      .then((_res) => {
-        this.router.navigate(['']);
+      .then((_res: any) => {
+        this.spinner.show();
+        this.user.id = _res.user.uid;
+        this.user.tipoUsuario = '1';
+        this.user.primerNombre = _res.user.displayName.split(' ')[0];
+        this.user.segundoNombre = _res.user.displayName.split(' ')[1];
+        this.user.primerApellido = _res.user.displayName.split(' ')[2];
+        this.user.segundoApellido = _res.user.displayName.split(' ')[3] ? _res.user.displayName.split(' ')[3] : '';
+        this.user.cedula = '';
+        this.userService.createUser(this.user).subscribe(_res => {
+
+          this.router.navigate(['']);
+          this.spinner.hide();
+        }, err => {
+          console.log(err);
+        });
       })
       .catch((err) => {
         console.log("err", JSON.parse(err));
@@ -62,13 +77,16 @@ export class SigninComponent implements OnInit {
    * create user manual
    */
   onSignIn() {
-
+    this.spinner.show();
     this.auth.registerUserEmail(this.form.get('email').value, this.form.get('password').value)
       .then((res: any) => {
+
         this.user.id = res.user.uid;
         this.user.tipoUsuario = '1';
+
         this.userService.createUser(this.user).subscribe(_res => {
           this.router.navigate(['']);
+          this.spinner.hide();
         }, err => {
           console.log(err);
         });
