@@ -16,6 +16,8 @@ Proyecto Generado con .Net Core y Entity Framework.
 
 * Para la autenticacion de la aplicacion web se utiliza Firebase Authentication, solo es necesario npm install sobre el proyecto frontend.
 
+* Para Evitar errores de CORS, se implemento un proxy en el proyecto frontend, que esta apuntando al endpoint  https://localhost:5001, si se corre en otro puerto el backend se debe modificar este archivo proxy.conf.json en el proyecto angular
+
 * Dentro del Proyecto se encuentra el archivo dataBaseQuery.sql correspondiente a la base de datos y se debe ejecutar sobre ambienre Sql Server.
 
 ----
